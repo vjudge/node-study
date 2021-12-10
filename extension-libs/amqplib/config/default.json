@@ -1,0 +1,18 @@
+{
+  "consul": {
+    "url": "http://127.0.0.1:8500",
+    "host": "127.0.0.1",
+    "port": "8500",
+    "token": "",
+    "timeout": "15s",
+    "timeoutMilliseconds": 15000,
+    "serviceConsul": "consul",
+    "kvKeys": {
+    },
+    "leaderSession": {
+      "ttl": "16s",
+      "lock-delay": "0s",
+      "renewInterval": "5s"
+    }
+  }
+}
