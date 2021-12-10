@@ -1,0 +1,15 @@
+{
+  "name": "node-consul",
+  "version": "1.0.0",
+  "description": "consul-example",
+  "main": "consul-client.js",
+  "scripts": {
+    "test": "node consul-client.js"
+  },
+  "author": "gradonday@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "config": "^3.3.6",
+    "consul": "^0.40.0"
+  }
+}
