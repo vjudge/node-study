@@ -7,7 +7,7 @@ const tidb = config.get('tidb');
 const sequelize = new Sequelize(tidb);
 
 const modelDefiners = [
-    require('./models/user.model')
+    require('./schema/user.schema')
 ]
 
 for (const modelItem of modelDefiners) {
