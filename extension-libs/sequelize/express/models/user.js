@@ -8,13 +8,14 @@ module.exports = {
     createUser
 }
 
-async function fetchUser () {
-    let result = 'vjudge'
+async function fetchUser (userInfo) {
+    let result = await sequelize.models.user.findOne({ where: userInfo });
     return result
 }
 
-async function createUser (user) {
-    let result = await sequelize.user.create(user);
+async function createUser (userInfo) {
+    let user = await sequelize.models.user.create(userInfo);
+    let result = user.toJSON();
     console.log('createUser result', result)
     return result
 }

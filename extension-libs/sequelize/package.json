@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "dev": "nodemon --ignore node_modules/ --ignore tests/ --delay 1 index.js"
   },
   "author": "gradonday@gmail.com",
   "license": "ISC",
@@ -21,7 +21,8 @@
     "mysql2": "^2.3.3",
     "require-dir": "^1.2.0",
     "response-time": "^2.3.2",
-    "sequelize": "^6.12.5"
+    "sequelize": "^6.12.5",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "debug": "^4.3.3",

@@ -11,17 +11,17 @@ async function init () {
     await initDB();
 
     http.createServer(app).listen(HTTP_PORT, function () {
-        console.info(`HTTP Server listening on port: ${HTTP_PORT}, in ${app.get('env')}`)
+        console.info(`HTTP Server listening on port: ${HTTP_PORT}, in ${app.get('env')}`);
     })
 }
 
 async function initDB () {
     try {
         await sequelize.authenticate();
-        console.log('Database connection OK!')
+        console.log('Database connection OK!');
     } catch (err) {
         console.error(err);
-        console.log('Database connect is failed!')
-        process.exit(1)
+        console.log('Database connect is failed!');
+        process.exit(1);
     }
 }

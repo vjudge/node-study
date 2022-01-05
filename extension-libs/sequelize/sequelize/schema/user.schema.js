@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('user', {
@@ -10,12 +10,13 @@ module.exports = (sequelize) => {
         userId: {
             allowNull: false,
             primaryKey: true,
-            type: DataTypes.UUIDV4
+            type: DataTypes.UUID,
+            defaultValue: Sequelize.UUIDV4
         },
         userName: {
             allowNull: false,
             type: DataTypes.STRING,
-            unique: true,
+            unique: { args: true, msg: 'username already exists.' },
             validate: {
                 // We require usernames to have length of at least 3, and
                 // only use letters, numbers and underscores.

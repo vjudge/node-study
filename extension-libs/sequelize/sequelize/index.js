@@ -3,8 +3,8 @@ const { Sequelize } = require('sequelize');
 
 const { applyExtraSetup } = require('./extra-setup');
 
-const tidb = config.get('tidb');
-const sequelize = new Sequelize(tidb);
+const sequelize = new Sequelize(config.get('tidb'));
+// const sequelize = new Sequelize(config.get('mysqldb'));
 
 const modelDefiners = [
     require('./schema/user.schema')
