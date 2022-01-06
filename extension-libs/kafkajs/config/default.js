@@ -6,8 +6,7 @@ module.exports = {
       "requestTimeout": 30000,
       "autoConnect": true,
       "reconnectOnIdle": true,
-      "maxAsyncRequests": 10,
-      versions: { disabled: false, requestTimeout: 500 }
+      "maxAsyncRequests": 10
     },
     "topic_opts": {
       "partitions": 3,
