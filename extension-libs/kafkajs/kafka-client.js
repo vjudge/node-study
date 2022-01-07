@@ -18,6 +18,47 @@ class KafkaClient {
         return true
     }
 
+    async consumeMsg (topic, groupId) {
+        const consumer = this.kafka.consumer({ groupId })
+        await consumer.connect();
+        await consumer.subscribe({ topic })
+        console.log('--------------------------')
+        await consumer.run({
+            partitionsConsumedConcurrently: 2,
+            eachMessage: async ({ topic, partition, message }) => {
+                console.log('---topic:', topic, partition)
+                console.log('=consumeMsg message:', message.value.toString())
+            }
+        });
+
+        const errorTypes = ['unhandledRejection', 'uncaughtException']
+        const signalTraps = ['SIGTERM', 'SIGINT', 'SIGUSR2']
+
+        errorTypes.map(type => {
+            process.on(type, async e => {
+                try {
+                    console.log(`process.on ${type}`)
+                    console.error(e)
+                    await consumer.disconnect()
+                    process.exit(0)
+                } catch (_) {
+                    process.exit(1)
+                }
+            })
+        })
+
+        signalTraps.map(type => {
+            process.once(type, async () => {
+                try {
+                    await consumer.disconnect()
+                } finally {
+                    process.kill(process.pid, type)
+                }
+            })
+        })
+        // await consumer.disconnect();
+    }
+
     async createTopic (topic, tcfg) {
         let topics = [_.assign({ topic }, config.get('kafka.topic.tscfg'), tcfg)];
         let params = _.assign({ topics }, config.get('kafka.topic.ctopt'));
