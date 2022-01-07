@@ -2,6 +2,7 @@ module.exports = {
   "kafka": {
     "connect_opts": {
       "kafkaHost": "127.0.0.1:9092",
+      "kafkaHost": "110.42.242.*:9092",
       "connectTimeout": 10000,
       "requestTimeout": 30000,
       "autoConnect": true,
