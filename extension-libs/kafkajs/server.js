@@ -4,7 +4,8 @@ const kafka = require('./kafka-client');
 main()
 
 async function main() {
-    await sendMsg();
+    // await sendMsg();
+    await consumeMsg();
     // await createTopic();
 }
 
@@ -14,6 +15,12 @@ async function sendMsg () {
     await kafka.sendMsg(topic, messages);
     console.log('send message successfully.')
     return true;
+}
+
+async function consumeMsg () {
+    let topic = 'kafkajs-test';
+    let groupId = 'kafkajs-grp';
+    await kafka.consumeMsg(topic, groupId)
 }
 
 async function createTopic () {
