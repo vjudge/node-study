@@ -1,3 +1,4 @@
+// 内网IP
 function getIPAddress(){
     var interfaces = require('os').networkInterfaces();
     for(var devName in interfaces){
