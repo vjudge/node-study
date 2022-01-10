@@ -21,13 +21,18 @@ class KafkaClient {
     async consumeMsg (topic, groupId) {
         const consumer = this.kafka.consumer({ groupId })
         await consumer.connect();
-        await consumer.subscribe({ topic })
+        await consumer.subscribe({ topic, fromBeginning: true })
         console.log('--------------------------')
         await consumer.run({
-            partitionsConsumedConcurrently: 2,
-            eachMessage: async ({ topic, partition, message }) => {
-                console.log('---topic:', topic, partition)
-                console.log('=consumeMsg message:', message.value.toString())
+            // autoCommit: false,
+            // partitionsConsumedConcurrently: 2,
+            eachMessage: ({ topic, partition, message }) => {
+                console.log('---consumeMsg.topic:', topic, partition)
+                console.log('---consumeMsg.message', {
+                    key: message.key,
+                    value: message.value,
+                    headers: message.headers
+                })
             }
         });
 

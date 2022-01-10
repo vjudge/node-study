@@ -4,8 +4,8 @@ const kafka = require('./kafka-client');
 main()
 
 async function main() {
-    // await sendMsg();
-    await consumeMsg();
+    await sendMsg();
+    // await consumeMsg();
     // await createTopic();
 }
 
@@ -24,6 +24,9 @@ async function consumeMsg () {
 }
 
 async function createTopic () {
+    let topic = 'kafkajs-test';
+    await kafka.createTopic(topic);
+
     let thisIp = sdk.getIPAddress();
     let result = await kafka.createTopic('serv-' + thisIp);
     console.log('result:', result);
