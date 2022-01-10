@@ -45,11 +45,11 @@ class KafkaClient {
     }
 
     // 生产消息，并放入对应的主题
-    produceMsg (payload) {
+    produceMsg (payloads) {
         const producer = new Kafka.Producer(this.client);
-        console.log('=producerMsg payload:', payload)
+        console.log('=producerMsg payload:', payloads)
         producer.on('ready', () => {
-            producer.send(payload, (err, data) => {
+            producer.send(payloads, (err, data) => {
                 console.log('=producerMsg err:', err)
                 console.log('=producerMsg data:', data)
             })
@@ -63,20 +63,27 @@ class KafkaClient {
     consumeMsg (topic, partition) {
         let payloads = []
         for (let i = 0; i < partition; i ++) {
-            payloads.push({ topic });
+            payloads.push({ topic, partition: i });
         }
         console.log('=consumeMsg payloads: ', payloads)
         const consumer = new Kafka.Consumer(this.client, payloads, {
-            groupId: 'test-grp',
+            groupId: 'kafka-node-grp',
+            protocol: ['roundrobin'],
             autoCommit: true,
+            autoCommitIntervalMs: 5000,
             fetchMaxWaitMs: 1000,
-            fetchMaxBytes: 1024 * 1024
+            fetchMinBytes: 1,
+            fetchMaxBytes: 1024 * 1024,
+            fromOffset: false,
+            encoding: 'utf8',
+            keyEncoding: 'utf8'
         })
+
         consumer.on('message', (message) => {
-            console.log('=consumeMsg message: ', message)
+            console.log('=consumeMsg.on message: ', message)
             consumer.commit(function(err, data) {
-                console.log('=consumeMsg err:', err)
-                console.log('=consumeMsg data:', data)
+                console.log('=consumeMsg.commit err:', err)
+                console.log('=consumeMsg.commit data:', data)
             })
         })
         // consumer.on('error', function (err) {
@@ -87,16 +94,42 @@ class KafkaClient {
     // 消费消息
     consumeMsgByGrp (topic) {
         const consumeGrpOpts = {
-            host: '110.42.242.203:9092',
-            groupId: 'test-grp',
+            kafkaHost: '110.42.242.203:9092',
+            // kafkaHost: "101.34.216.17:9092",
+            groupId: 'kafka-node-grp',
             sessionTimeout: 15000,
             protocol: ['roundrobin'],
-            fromOffset: 'earliest'
+            fromOffset: 'earliest',
+            outOfRangeOffset: "none",
+            autoCommit: true,
+            autoCommitIntervalMs: 1000,
+            heartbeatInterval: 1000,
+            maxTickMessages: 1
         }
         console.log('=consumeGrpOpts:', consumeGrpOpts, topic)
-        const consumer = new Kafka.ConsumerGroup(_.assign({ id: 'consumer' }, consumeGrpOpts), [topic])
-        consumer.on('message', async (message) => {
+        const consumer = new Kafka.ConsumerGroup(consumeGrpOpts, topic)
+        consumer.on("connect", () => {
+            console.log("kafka consumerGroup connect");
+        });
+
+        consumer.on('message', (message) => {
             console.log('message: ', message)
+        })
+
+        // consumer.on("error", (err) => {
+        //     console.error("consumeMsgByGrp Error: ", err);
+        // });
+    }
+
+    async listGrp () {
+        const admin = new Kafka.Admin(this.client);
+        admin.listGroups((err, data) => {
+            console.log('consumerGroup:', data);
+            _.map(data, (val, key) => {
+                admin.describeGroups([key], (err, res) => {
+                    console.log(res)
+                })
+            })
         })
     }
 }

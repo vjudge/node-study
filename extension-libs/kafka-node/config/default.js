@@ -1,8 +1,9 @@
 module.exports = {
   "kafka": {
     "connect_opts": {
-      "kafkaHost": "127.0.0.1:9092",
-      "kafkaHost": "110.42.242.*:9092",
+      // "kafkaHost": "127.0.0.1:9092",
+      "kafkaHost": "110.42.242.203:9092",
+      // "kafkaHost": "101.34.216.17:9092",
       "connectTimeout": 10000,
       "requestTimeout": 30000,
       "autoConnect": true,
@@ -13,10 +14,11 @@ module.exports = {
     "topic_opts": {
       "partitions": 3,
       "replicationFactor": 3,
+      "protocol": ["roundrobin"],
       "configEntries": [ // Optional set of config entries
         {
           "name": "compression.type",
-          "value": "zstd"
+          "value": "gzip"
         },
         {
           "name": "min.compaction.lag.ms",

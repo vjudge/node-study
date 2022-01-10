@@ -9,23 +9,27 @@ async function main() {
     await consumeMsg()
     // await consumeMsgByGrp()
     // await createTopic()
+    // await listGrp();
 }
 
 async function produceMsg () {
     let topic = 'kafka-node-test';
+    let thisIP = sdk.getIPAddress();
+    let topicIp = 'serv-kn-' + thisIP;
     const kv = new Kafka.KeyedMessage('key', 'message')
-    const payload = [
-        { topic, message: 'hi', partition: 0 },
-        { topic, message: ['Hi', 'vjudge', kv], partition: 1 }
+    const payloads = [
+        { topic, messages: 'hello world.', partition: 0 },
+        { topic, messages: 'This is a message.', partition: 2 },
+        { topic: topicIp, messages: ['Hi', 'vjudge.', kv], partition: 1 }
     ]
-    let result = await kafkaClient.produceMsg(payload)
+    let result = await kafkaClient.produceMsg(payloads)
     console.log('producerMsg result:', result)
     return result
 }
 
 async function consumeMsg () {
     let topic = 'kafka-node-test';
-    await kafkaClient.consumeMsg(topic, 1)
+    await kafkaClient.consumeMsg(topic, 2)
 }
 
 async function consumeMsgByGrp () {
@@ -38,6 +42,11 @@ async function createTopic () {
     await kafkaClient.createTopic(topic);
 
     let thisIP = sdk.getIPAddress();
-    let result = await kafkaClient.createTopic('serv-kn-' + thisIP);
+    let topicIp = 'serv-kn-' + thisIP;
+    let result = await kafkaClient.createTopic(topicIp);
     console.log('createTopic result:', result)
+}
+
+async function listGrp () {
+    await kafkaClient.listGrp();
 }
