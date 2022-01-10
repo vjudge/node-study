@@ -24,13 +24,18 @@ class KafkaClient {
         await consumer.subscribe({ topic, fromBeginning: true })
         console.log('--------------------------')
         await consumer.run({
-            // autoCommit: false,
+            autoCommit: true,
             // partitionsConsumedConcurrently: 2,
-            eachMessage: ({ topic, partition, message }) => {
+            eachMessage: async ({ topic, partition, message }) => {
+                await consumer.commitOffsets([{
+                    topic: topic,
+                    partition: partition,
+                    offset: Number(message.offset) + 1
+                }]);
                 console.log('---consumeMsg.topic:', topic, partition)
                 console.log('---consumeMsg.message', {
                     key: message.key,
-                    value: message.value,
+                    value: message.value.toString(),
                     headers: message.headers
                 })
             }

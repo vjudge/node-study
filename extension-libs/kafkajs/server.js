@@ -4,8 +4,8 @@ const kafka = require('./kafka-client');
 main()
 
 async function main() {
-    await sendMsg();
-    // await consumeMsg();
+    // await sendMsg();
+    await consumeMsg();
     // await createTopic();
 }
 
