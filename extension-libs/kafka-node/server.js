@@ -6,8 +6,8 @@ main();
 
 async function main() {
     // await produceMsg()
-    await consumeMsg()
-    // await consumeMsgByGrp()
+    // await consumeMsg()
+    await consumeMsgByGrp()
     // await createTopic()
     // await listGrp();
 }
@@ -19,8 +19,8 @@ async function produceMsg () {
     const kv = new Kafka.KeyedMessage('key', 'message')
     const payloads = [
         { topic, messages: 'hello world.', partition: 0 },
-        { topic, messages: 'This is a message.', partition: 2 },
-        { topic: topicIp, messages: ['Hi', 'vjudge.', kv], partition: 1 }
+        { topic, messages: 'This is a message.', partition: 1 },
+        // { topic, messages: ['Hi', 'vjudge.', kv], partition: 1 }
     ]
     let result = await kafkaClient.produceMsg(payloads)
     console.log('producerMsg result:', result)

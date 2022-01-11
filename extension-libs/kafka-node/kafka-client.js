@@ -63,7 +63,7 @@ class KafkaClient {
     consumeMsg (topic, partition) {
         let payloads = []
         for (let i = 0; i < partition; i ++) {
-            payloads.push({ topic, partition: i });
+            payloads.push({ topic, partition: i+1 });
         }
         console.log('=consumeMsg payloads: ', payloads)
         const consumer = new Kafka.Consumer(this.client, payloads, {
@@ -94,8 +94,7 @@ class KafkaClient {
     // 消费消息
     consumeMsgByGrp (topic) {
         const consumeGrpOpts = {
-            kafkaHost: '110.42.242.203:9092',
-            // kafkaHost: "101.34.216.17:9092",
+            kafkaHost: '110.42.242.*:9092',
             groupId: 'kafka-node-grp',
             sessionTimeout: 15000,
             protocol: ['roundrobin'],
