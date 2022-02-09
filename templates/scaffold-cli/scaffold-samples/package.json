@@ -1,0 +1,25 @@
+{
+  "name": "scaffold-samples",
+  "version": "1.0.0",
+  "description": "脚手架模板",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "ss-cli": "./bin/ss-cli.js"
+  },
+  "author": "gradonday@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "commander": "^9.0.0",
+    "download": "^8.0.0",
+    "inquirer": "^8.2.0",
+    "mkdirp": "^1.0.4",
+    "ora": "^6.0.1"
+  },
+  "devDependencies": {
+    "debug": "^4.3.3"
+  }
+}
