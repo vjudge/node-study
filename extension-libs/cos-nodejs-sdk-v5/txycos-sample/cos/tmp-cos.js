@@ -1,27 +1,24 @@
-import COS from 'cos-nodejs-sdk-v5';
-import rp from 'request-promise';
+const _ = require('lodash');
+const COS = require('cos-nodejs-sdk-v5');
 
-export function getCos () {
+const getSts = require('./get-sts');
+
+module.exports = function getTmpCos () {
+    const start = performance.now();
     const cos = new COS({
         getAuthorization: async function (options, callback) {
-            const ret: any = await rp({
-                uri: 'http://127.0.0.1:8100/res/sts',
-                method: 'GET',
-                headers: { appkey }
-            });
-            // console.log('ret', ret.data);
-            const stsParams = {
-                TmpSecretId: ret.data.data.credentials.tmpSecretId,
-                TmpSecretKey: ret.data.data.credentials.tmpSecretKey,
-                XCosSecurityToken: ret.data.data.credentials.sessionToken,
-                StartTime: ret.data.data.startTime, // 时间戳，单位秒，如：1580000000
-                ExpiredTime: ret.data.data.expiredTime, // 时间戳，单位秒，如：1580000900
+            const ret = await getSts();
+            // console.log('getCos.ret', ret);
+            const params = {
+                TmpSecretId: ret.credentials.tmpSecretId,
+                TmpSecretKey: ret.credentials.tmpSecretKey,
+                XCosSecurityToken: ret.credentials.sessionToken,
+                StartTime: ret.startTime, // 时间戳，单位秒，如：1580000000
+                ExpiredTime: ret.expiredTime, // 时间戳，单位秒，如：1580000900
             }
-            // console.log('stsParams', stsParams);
-            callback(stsParams);
+            // console.log('getCos.params', params);
+            callback(params);
         }
     });
     return cos;
 }
-
-function
