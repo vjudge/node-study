@@ -11,6 +11,9 @@
   "dependencies": {
     "config": "^3.3.7",
     "cos-nodejs-sdk-v5": "^2.11.6",
-    "uuid": "^8.3.2"
+    "lodash": "^4.17.21",
+    "qcloud-cos-sts": "^3.0.6",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.6"
   }
 }
