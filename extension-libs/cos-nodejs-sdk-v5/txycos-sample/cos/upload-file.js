@@ -14,7 +14,7 @@ module.exports = function uploadFile (cos, cosPath, localFilePath) {
             }
         }), function(err, data) {
             const end = performance.now();
-            console.log(`资源上传时长: ${_.floor(end - start, 2)}ms`);
+            console.log(`uploadFile: ${_.floor(end - start, 2)}ms`);
             if (err) {
                 console.error('uploadFile err: ', err);
                 return reject(err);
