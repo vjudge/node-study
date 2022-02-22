@@ -14,7 +14,7 @@ module.exports = function putObject (cos, cosPath, localFilePath) {
             }
         }), (err, data) => {
             const end = performance.now();
-            console.log(`资源上传时长: ${_.floor(end - start, 2)}ms`);
+            console.log(`putObject: ${_.floor(end - start, 2)}ms`);
             if (err) {
                 console.error(`[${localFilePath}] Error`, err);
                 return reject(null);
