@@ -1,5 +1,8 @@
-exports.getSts = require('./get-sts');
-exports.getTmpCos = require('./tmp-cos');
-exports.putObject = require('./put-object');
-exports.uploadFile = require('./upload-file');
-exports.sliceUploadFile = require('./slice-upload-file');
+module.exports = {
+    getSts:  require('./get-sts'),
+    getTmpCos: require('./tmp-cos'),
+    putObject: require('./put-object'),
+    ...require('./get-object-url'),
+    uploadFile: require('./upload-file'),
+    sliceUploadFile: require('./slice-upload-file'),
+};
