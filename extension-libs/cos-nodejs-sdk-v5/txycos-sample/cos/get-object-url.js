@@ -6,7 +6,7 @@ exports.getDownloadUrl = function (cos, cosPath) {
     return getObjectUrl(cos, cosPath).then((data) => {
         const ret = data + (data.indexOf('?') > -1 ? '&' : '?') + 'response-content-disposition=attachment';
         const end = performance.now();
-        console.log(`获取资源时长: ${_.floor(end - start, 2)}ms`);
+        console.log(`getDownloadUrl: ${_.floor(end - start, 2)}ms`);
         return ret;
     }).catch((err) => {
         console.error('getDownloadUrl.Error:', err);
@@ -18,7 +18,7 @@ exports.getUploadUrl = function (cos, cosPath) {
     const start = performance.now();
     return getObjectUrl(cos, cosPath, 'PUT').then((data) => {
         const end = performance.now();
-        console.log(`获取资源时长: ${_.floor(end - start, 2)}ms`);
+        console.log(`getUploadUrl: ${_.floor(end - start, 2)}ms`);
         return data;
     }).catch((err) => {
         console.error('getUploadUrl.Error:', err);
@@ -39,7 +39,7 @@ function getObjectUrl (cos, cosPath, Method = 'GET') {
             // },
         }), (err, data) => {
             const end = performance.now();
-            console.log(`获取资源时长: ${_.floor(end - start, 2)}ms`);
+            console.log(`getObjectUrl: ${_.floor(end - start, 2)}ms`);
             if (err) {
                 return reject(err);
             }
