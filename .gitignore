@@ -1,6 +1,11 @@
+# idea
 *.DS_Store
 *.idea
 *.vscode
+*.iml
+*.ipr
+*.iws
+
 # Binaries for programs and plugins
 *.exe
 *.exe~
@@ -14,12 +19,20 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# gradle
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+build/
+
 # Dependency directories (remove the comment below to include it)
 # vendor/
 
-# node
+# nodejs
 node_modules
 package-lock.json
 
 # person
-*vjudge*
+**/vjudge/**
+vjudge*.*
+
