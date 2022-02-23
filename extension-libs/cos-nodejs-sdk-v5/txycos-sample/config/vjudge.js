@@ -1,14 +1,14 @@
 module.exports = {
-    SecretId: '',
-    SecretKey: '',
-    APPID: '',
+    SecretId: 'AKIDEH5cssb4GBpDLCn8CzVkjQq0uXtynLcb',
+    SecretKey: 'kIabEafV4NPAevwg9LGuHNDm45qKXT8W',
+    APPID: '1253686866',
     bucket: {
-        shortBucket: '',
-        Bucket: '',
-        Region: '',
+        shortBucket: 'co-engine',
+        Bucket: 'co-engine-1253686866',
+        Region: 'ap-beijing',
         StorageClass: 'STANDARD',
         Expires: 900,
-        SliceSize: 10 * 1024 * 1024, // 大于 10M 进行分块上传
+        SliceSize: 1 * 1024 * 1024, // 大于 1M 进行分块上传
         AsyncLimit: 3,
     },
     stsOpts: { // direct upload
@@ -26,7 +26,9 @@ module.exports = {
             'name/cos:CompleteMultipartUpload',
             'name/cos:AbortMultipartUpload',
             // 高级上传
-            // 'name/cos:uploadFile',
+            'name/cos:uploadFile',
+            // 其他
+            'name/cos:getObjectUrl',
         ]
     }
 }
