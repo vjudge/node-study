@@ -20,13 +20,13 @@ async function main () {
   // });
   const cos = cns.getTmpCos(); // 获取临时授权cos
 
-  // const ret = await cns.putObject(cos, cosPath, localFilePath);
+  const ret = await cns.putObject(cos, cosPath, localFilePath);
   // const ret = await cns.uploadFile(cos, cosPath, localFilePath);
   // const ret = await cns.sliceUploadFile(cos, cosPath, localFilePath);
   // const ret = await uploadByUrl(cos, cosPath);
   // const ret = await cns.getObjectUrl(cos, cosPath);
   // const ret = await cns.getDownloadUrl(cos, cosPath);
-  const ret = await multiPartUpload(cos, cosPath, localFilePath);
+  // const ret = await multiPartUpload(cos, cosPath, localFilePath);
   console.log('====== ret', ret);
   return ret;
 }
