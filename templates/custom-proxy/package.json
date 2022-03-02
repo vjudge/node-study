@@ -1,0 +1,25 @@
+{
+  "name": "custom-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "DEBUG=app* NODE_ENV=development nodemon --delay 2 --ignore node_modules/ server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "compression": "^1.7.4",
+    "config": "^3.3.7",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.17.3",
+    "helmet": "^5.0.2",
+    "lodash": "^4.17.21",
+    "request-promise": "^4.2.6"
+  },
+  "devDependencies": {
+    "debug": "^4.3.3",
+    "nodemon": "^2.0.15"
+  }
+}
