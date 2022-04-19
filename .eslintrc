@@ -2,20 +2,20 @@
   "root": true,
   "plugins": [
     "eslint-plugin",
-    "import",
+    "import"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:eslint-plugin/recommended",
-    "plugin:import/recommended",
+    "plugin:import/recommended"
   ],
   "env": {
     "node": true,
-    "es6": true,
+    "es6": true
   },
   "parserOptions": {
     "sourceType": "module",
-    "ecmaVersion": 2020,
+    "ecmaVersion": 2020
   },
   "rules": {
     "comma-dangle": ["error", {
@@ -23,7 +23,7 @@
       "objects": "always-multiline",
       "imports": "always-multiline",
       "exports": "always-multiline",
-      "functions": "always-multiline",
+      "functions": "always-multiline"
     }],
     "comma-style": [2, "last"],
     "curly": [2, "multi-line"],
@@ -47,24 +47,24 @@
     "object-curly-spacing": [2, "always"],
     "object-shorthand": ["error", "always", {
       "ignoreConstructors": false,
-      "avoidQuotes": true,
+      "avoidQuotes": true
     }],
     "one-var": [2, "never"],
     "prefer-const": 2,
     "quotes": [2, "single", {
       "allowTemplateLiterals": true,
-      "avoidEscape": true,
+      "avoidEscape": true
     }],
     "semi": [2, "always"],
     "space-before-function-paren": ["error", {
       "anonymous": "always",
       "named": "never",
-      "asyncArrow": "always",
+      "asyncArrow": "always"
     }],
 
     "eslint-plugin/consistent-output": [
       "error",
-      "always",
+      "always"
     ],
     "eslint-plugin/meta-property-ordering": "error",
     "eslint-plugin/no-deprecated-context-methods": "error",
@@ -76,55 +76,55 @@
 
     // dog fooding
     "import/no-extraneous-dependencies": "error",
-    "import/unambiguous": "off",
+    "import/unambiguous": "off"
   },
 
   "settings": {
     "import/resolver": {
       "node": {
         "paths": [
-          "src",
-        ],
-      },
-    },
+          "src"
+        ]
+      }
+    }
   },
 
   "overrides": [
     {
       "files": "scripts/**",
       "rules": {
-        "no-console": "off",
-      },
+        "no-console": "off"
+      }
     },
     {
       "files": "resolvers/**",
       "env": {
-        "es6": false,
-      },
+        "es6": false
+      }
     },
     {
       "files": "resolvers/webpack/**",
       "rules": {
         "import/no-extraneous-dependencies": 1,
-        "no-console": 1,
+        "no-console": 1
       },
       "env": {
-        "es6": true,
-      },
+        "es6": true
+      }
     },
     {
       "files": [
-        "resolvers/*/test/**/*",
+        "resolvers/*/test/**/*"
       ],
       "env": {
         "mocha": true,
         "es6": false
-      },
+      }
     },
     {
       "files": "utils/**",
       "parserOptions": {
-        "ecmaVersion": 6,
+        "ecmaVersion": 6
       },
       "rules": {
         "comma-dangle": ["error", {
@@ -134,18 +134,18 @@
           "exports": "always-multiline",
           "functions": "never"
         }],
-        "no-console": 1,
-      },
+        "no-console": 1
+      }
     },
     {
       "files": "tests/**",
       "env": {
-        "mocha": true,
+        "mocha": true
       },
       "rules": {
         "max-len": 0,
-        "import/default": 0,
-      },
-    },
-  ],
+        "import/default": 0
+      }
+    }
+  ]
 }
